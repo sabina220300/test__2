@@ -1,0 +1,102 @@
+//package bpiz184023;
+interface IcLass1 
+{
+String getRes();
+String getS();
+double vOb();
+String showRes();
+}
+
+abstract class cLass1 implements IcLass1
+{
+	private double w;
+	private double h;
+	private double p;
+	public cLass1()
+	{
+		w=h=p=0;
+	};
+	public cLass1(double w, double h, double p)
+	{
+		this.w = w;
+		this.h = h;
+		this.p=p;
+	}
+	public double getW() {return w;}
+	public double getH() {return h;}
+	public double getP() {return p;}
+	public void setH(double h) {this.h = h;}
+	public void setW(double w) {this.w = w;}
+	public void setP(double p) {this.p = p;}
+	public String showRes()
+	{
+		return "Ширина: "+w+"; Высота: "+h+"; Плотность: "+p; 
+	}
+	public String getRes()
+	{
+		return "";
+	}
+	public String getS() {return "";}
+	abstract public double vOb(); 
+
+}
+class Triangle extends cLass1
+{
+	private double k = 0.5;
+	private double p = 1;
+
+	public Triangle() {super();}
+	public Triangle(double w, double h, double p)
+	{
+		super(w,h,p);
+		//this.k = k;
+	}
+	public String getRes() {return "Треугольник";}
+	public String getS() { if (getH()==getW()) return "высота равна длине основания"; 
+	if (getH()<getW()) return "высота меньше длины основания";
+	return "высота больше длины основания";
+	}
+	public double vOb() {return getH()*getW()*k*getP();}	
+}
+class Rectangle extends cLass1
+{
+	private double p = 1;
+	public Rectangle() {super();}
+	public Rectangle(double w, double h, double p)
+	{
+		super(w,h,p);
+	}
+	private boolean isSquare()
+	{
+		if(getH()==getW()) return true;
+		else return false;
+	}
+	public String getRes() {if (isSquare()) return "Квадрат"; return "Прямоугольник";}
+	public String getS() { if (getH()==getW()) return "стороны равны"; 
+	if (getH()<getW()) return "стороны не равны; прямоугольник удлинен в ширину";
+	 return "стороны не равны; прямоугольник удлинен в высоту";
+	}
+	public double vOb() {return getH()*getW()*getP();}	
+}
+public class Safiulinae 
+{
+		//private double ves = 0;
+		static void shapes(cLass1 class1)
+		{
+			//this.ves = class1.getP()*class1.vOb();
+			System.out.println("Объект: "+class1.getRes()
+			+"\n Размеры: "+class1.showRes()+"\n Объем: "+class1.vOb()+" \n Вес:"+class1.getP()*class1.vOb()+"\n Свойства: "+class1.getS());
+		}
+		public static void main(String args[])
+		{
+			cLass1 tr = new Triangle(4,5, 0.9);
+			shapes(tr);
+			cLass1 re = new Rectangle();
+			re.setH(6.);
+			re.setW(8.);
+			re.setP(0.8);
+			shapes(re);
+			cLass1 squ = new Rectangle(5.,5.,0.7);
+			shapes(squ);
+		}
+}
